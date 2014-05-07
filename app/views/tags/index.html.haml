@@ -35,26 +35,26 @@
 .container
   .page-header
     .row
-      %h1{ :style => "text-align:center"} All Comments  
-      - @comments.each do |c|
+      %h1{ :style => "text-align:center"} All Tags
+      - @tags.each do |t|
         .col-md-4 
-          = c.content
+          = t.name
           %p
-          Attached To:
-          = c.commentable_type
+          Tagged To:
+          = t.photo.name
           %p
           Date Created:
-          = c.created_at
+          = t.created_at
           %p          
           / Date Last Updated:
-          / = c.updated_at
+          / = t.updated_at
           / %br
           / %br
-          / = link_to "Show", comment_path(c)
+          / = link_to "Show", tag_path(t)
           / = " | "
-          / = link_to "Edit", edit_comment_path(c), method: "get"
+          / = link_to "Edit", edit_tag_path(t), method: "get"
           / = " | "
-          = link_to "Delete", comment_path(c), :method => :delete
+          = link_to "Delete", tag_path(t), :method => :delete
           %br
           %br
-  / = button_to 'Add Comment', new_comment_path, method: "get", :class => "button btn btn-lg btn-primary"
+  / = button_to 'Add Tag', new_tag_path, method: "get", :class => "button btn btn-lg btn-primary"

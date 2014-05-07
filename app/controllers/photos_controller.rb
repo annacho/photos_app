@@ -9,6 +9,7 @@ class PhotosController < ApplicationController
   def show
     @photo = Photo.find(params[:id])
     @new_comment = @photo.comments.build
+    @new_tag = @photo.tags.build
   end
 
   # GET /photos/new

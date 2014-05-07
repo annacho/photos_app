@@ -37,10 +37,22 @@
     .row
       / .col-md-4 
       = form_for @event, url: "/events/#{@event.id}", method: "put" do |f|
-        %h1= f.text_field :description
-        / .thumbnail
-        /   = image_tag @photo.image.url
-        = render 'form', f: f
+        %h1= @event.description
+        %p
+          %b Name:
+          = @event.name
+        %p
+          %b Date:
+          = @event.datetime
+        %p
+          %b Location:
+          = @event.location
+        %p
+          %b Who Else Was Involved?
+          = @event.person
+        %p
+          %b Last Updated:
+          = @event.updated_at
         %p
         %h2 Comments
         .items

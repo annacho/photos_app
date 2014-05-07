@@ -39,9 +39,21 @@
       = form_for @photo, url: "/photos/#{@photo.id}", method: "put" do |f|
         .thumbnail
           = image_tag @photo.image.url
-        = render 'form', f: f
         %p
-        / = ff.comment.content
+          %b Album Name:
+          = @photo.album_name
+        %p
+          %b Name:
+          = @photo.name
+        %p
+          %b Description:
+          = @photo.description
+        %p
+          %b Date:
+          = @photo.datetime
+        %p
+          %b Who Else is in the Picture?
+          = @photo.person         
         %p
         %h2 Comments
         .items
@@ -54,26 +66,20 @@
               = ff.hidden_field :_destroy
         / %a.add{href: "/comments"} Add Comment
         = f.submit "Add Comment", :class => "button btn btn-link"
-
-        / = f.fields_for :comments do |ff|
-        /   %p
-
-        /   %p
-        /   = ff.text_field :content
-        /   %p
-        /   = link_to "", :method => :delete
-        /   %p
-        / = f.submit "Add More Comments"
-      %p
+        %p
+        %h2 Tags
+        .items
+          = f.nested_fields_for :tags do |ff|
+            %fieldset.item
+              = ff.text_field :name
+              %a.remove{href: "#"} Delete
+              = ff.hidden_field :tagged, value: "Photo"
+              = ff.hidden_field :_destroy
+        = f.submit "Add Tag", :class => "button btn btn-link"
+        %p  
       = link_to "Save", photos_path, :class => "button btn btn-lg btn-primary"
       / .col-md-4   
       / - @comments.each do |c|
       /   Content
       /   = c.content 
       /   = c.timestamp
-
-      / = form_for @new_comment, url: comments_path, method: :post do |f|
-      /   = f.hidden_field :commentable_id, value: @new_comment.commentable_id
-      /   = f.hidden_field :commentable_type, value: @new_comment_commentable type
-      /   = f.text_field :content
-      /   = f.submit "Add Comment"
