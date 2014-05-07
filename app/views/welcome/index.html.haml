@@ -1,0 +1,108 @@
+.navbar.navbar-default
+  .navbar-header
+    %button.navbar-toggle{"data-target" => ".navbar-responsive-collapse", "data-toggle" => "collapse", :type => "button"}
+      %span.icon-bar
+      %span.icon-bar
+      %span.icon-bar
+    %a.navbar-brand{:href => "/"} Photo App
+  .navbar-collapse.collapse.navbar-responsive-collapse
+    %ul.nav.navbar-nav
+      %li
+        %a{:href => "/photos"} Photos
+      %li
+        %a{:href => "/events"} Events
+    %form.navbar-form.navbar-right
+      %input.form-control.col-lg-8{:placeholder => "Search", :type => "text"}
+    %ul.nav.navbar-nav.navbar-right
+      %li
+        %a{:href => "/comments"} Comments
+      %li
+        %a{:href => "/tags"} Tags    
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+          Me
+          %b.caret
+        %ul.dropdown-menu
+          %li
+            %a{:href => "/users/show"} View Account
+          %li
+            %a{:href => "/users/edit"} Edit Account
+          %li.divider
+          %li.dropdown-header 
+          %li
+            %a{:href => "/users/delete"} Logout
+
+.container
+  .row
+    %h1 <span class="glyphicon glyphicon-heart"></span> Hi, Me!
+    .col-xs-6
+      %h1 My Photos
+      / - @photos.each do |p|
+      /   .thumbnail
+      /     %img{:src => p.image}
+      /     %p
+      /   Album Name:
+      /   = p.album_name
+      /   %p
+      /   Photo Name:
+      /   = p.name
+      /   %p
+      /   Description:
+      /   = p.description
+      /   %p
+      /   Date:
+      /   = p.datetime
+      /   %p
+      /   Who Else is in the Picture?
+      /   = p.person
+      /   %br
+      /   %br
+      /   = link_to "Show", photo_path(p)
+      /   = " | "
+      /   = link_to "Edit", edit_photo_path(p), method: "get"
+      /   = " | "
+      /   = link_to "Delete", photo_path(p), :method => :delete, :data => { :confirm => 'Are you sure?'}         
+      %br
+      = link_to 'Add Photos', "/photos/new", :class => "button btn btn-danger"
+      %br
+      %br
+      %br
+      %br
+      %br
+      %br
+    .col-xs-6
+      %h1 My Events
+      / - @events.each do |e| 
+      /   %h1= e.description
+      /   %p
+      /   Name:
+      /   = e.name
+      /   %p
+      /   Date:
+      /   = e.datetime
+      /   %p
+      /   Location:
+      /   = e.location
+      /   %p
+      /   Who Else Was There?
+      /   = e.person
+      /   %p 
+      /   Last Updated:
+      /   = e.updated_at
+      /   %br
+      /   %br
+      /   = link_to "Show", event_path(e)
+      /   = " | "
+      /   = link_to "Edit", edit_event_path(e), method: "get"
+      /   = " | "
+      /   = link_to "Delete", event_path(e), :method => :delete, :data => { :confirm => 'Are you sure?'} 
+      /   %br
+      /   %br
+      %br
+      = link_to 'Add Events', "/events/new", :class => "button btn btn-danger"
+      %br
+      %br
+      %br
+      %br
+      %br
+      %br

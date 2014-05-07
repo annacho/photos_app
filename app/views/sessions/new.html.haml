@@ -1,0 +1,92 @@
+.navbar.navbar-default
+  .navbar-header
+    %button.navbar-toggle{"data-target" => ".navbar-responsive-collapse", "data-toggle" => "collapse", :type => "button"}
+      %span.icon-bar
+      %span.icon-bar
+      %span.icon-bar
+    %a.navbar-brand{:href => "/"} Photo App
+  .navbar-collapse.collapse.navbar-responsive-collapse
+    %ul.nav.navbar-nav
+      %li
+        %a{:href => "/photos"} Photos
+      %li
+        %a{:href => "/events"} Events
+    %form.navbar-form.navbar-right
+      %input.form-control.col-lg-8{:placeholder => "Search", :type => "text"}
+    %ul.nav.navbar-nav.navbar-right
+      %li
+        %a{:href => "/comments"} Comments
+      %li
+        %a{:href => "/tags"} Tags    
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+          Me
+          %b.caret
+        %ul.dropdown-menu
+          %li
+            %a{:href => "/users/show"} View Account
+          %li
+            %a{:href => "/users/edit"} Edit Account
+          %li.divider
+          %li.dropdown-header 
+          %li
+            %a{:href => "/users/delete"} Logout
+
+.container
+  / .page-header
+  /   .row
+  %h1 Login
+  %br
+  %br
+  = form_tag sessions_path do 
+    = label_tag :email
+    = text_field_tag :email, params[:email]
+    %p
+    = label_tag :password
+    = password_field_tag :password
+    %p
+    = submit_tag "Login", :class => "button btn btn-lg btn-primary"
+    / %fieldset
+    /   %legend Login
+    /   = form_tag sessions_path, :html => { :class => 'form-horizontal' } do 
+    /     .form-group
+    /       %label.col-xs-2.control-label{:for => "inputEmail"} Email
+    /       .col-xs-6.col-sm-4
+    /         %input#inputEmail.form-control{:placeholder => "Email"}
+    /     %br
+    /     %br
+    /     .form-group
+    /       %label.col-xs-2.control-label{:for => "inputPassword"} Password
+    /       .col-xs-6.col-sm-4
+    /         %input#inputPassword.form-control{:placeholder => "Password"}
+    /         %checkbox
+    /           %label
+    /             %input{:type => "checkbox"}
+    /               Remember this computer
+    /     .form-group
+    /       .col-lg-10.col-lg-offset-2
+    /         %button.btn.btn-default Cancel
+    /         %button.btn.btn-primary{:type => "submit"} Login
+    / %br
+
+    / %form.form-horizontal
+    /   %fieldset
+    /     %legend Login
+    /     = sessions_path do |f|
+    /     .form-group
+    /       %f.label.col-lg-2.control-label{:for => "inputEmail"} Email
+    /       .col-lg-10
+    /         %input#inputEmail.form-control{:placeholder => "Email", :email, params[:email]}
+    /     .form-group
+    /       %label.col-lg-2.control-label{:for => "inputPassword"} Password
+    /       .col-lg-10
+    /         %input#inputPassword.form-control{:placeholder => "Password", :password}
+    /           .checkbox
+    /             %label
+    /               %input{:type => "checkbox"}
+    /                 Remember this computer
+    /     .form-group
+    /       .col-lg-10.col-lg-offset-2
+    /         %button.btn.btn-default Cancel
+    /         %button.btn.btn-primary{:type => "submit"} Login
+

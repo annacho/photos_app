@@ -1,1 +1,56 @@
-show.html.haml
+.navbar.navbar-default
+  .navbar-header
+    %button.navbar-toggle{"data-target" => ".navbar-responsive-collapse", "data-toggle" => "collapse", :type => "button"}
+      %span.icon-bar
+      %span.icon-bar
+      %span.icon-bar
+    %a.navbar-brand{:href => "/"} Photo App
+  .navbar-collapse.collapse.navbar-responsive-collapse
+    %ul.nav.navbar-nav
+      %li
+        %a{:href => "/photos"} Photos
+      %li
+        %a{:href => "/events"} Events
+    %form.navbar-form.navbar-right
+      %input.form-control.col-lg-8{:placeholder => "Search", :type => "text"}
+    %ul.nav.navbar-nav.navbar-right
+      %li
+        %a{:href => "/comments"} Comments
+      %li
+        %a{:href => "/tags"} Tags    
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+          Me
+          %b.caret
+        %ul.dropdown-menu
+          %li
+            %a{:href => "/users/show"} View Account
+          %li
+            %a{:href => "/users/edit"} Edit Account
+          %li.divider
+          %li.dropdown-header 
+          %li
+            %a{:href => "/users/delete"} Logout
+
+.container
+  .page-header
+    .row
+      / .col-md-4 
+      = form_for @event, url: "/events/#{@event.id}", method: "put" do |f|
+        %h1= f.text_field :description
+        / .thumbnail
+        /   = image_tag @photo.image.url
+        = render 'form', f: f
+        %p
+        %h2 Comments
+        .items
+          = f.nested_fields_for :comments do |ff|
+            %fieldset.item
+              = ff.text_field :content
+              %a.remove{href: "#"} Delete
+              / = ff.hidden_field :commentable_id, value: @event.commentable_id
+              = ff.hidden_field :commentable_type, value: "Event"
+              = ff.hidden_field :_destroy
+        = f.submit "Add Comment", :class => "button btn btn-link"
+      %p
+      = link_to "Save", events_path, :class => "button btn btn-lg btn-primary"

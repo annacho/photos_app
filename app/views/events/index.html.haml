@@ -1,1 +1,66 @@
-index.html.haml
+.navbar.navbar-default
+  .navbar-header
+    %button.navbar-toggle{"data-target" => ".navbar-responsive-collapse", "data-toggle" => "collapse", :type => "button"}
+      %span.icon-bar
+      %span.icon-bar
+      %span.icon-bar
+    %a.navbar-brand{:href => "/"} Photo App
+  .navbar-collapse.collapse.navbar-responsive-collapse
+    %ul.nav.navbar-nav
+      %li
+        %a{:href => "/photos"} Photos
+      %li
+        %a{:href => "/events"} Events
+    %form.navbar-form.navbar-right
+      %input.form-control.col-lg-8{:placeholder => "Search", :type => "text"}
+    %ul.nav.navbar-nav.navbar-right
+      %li
+        %a{:href => "/comments"} Comments
+      %li
+        %a{:href => "/tags"} Tags    
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+          Me
+          %b.caret
+        %ul.dropdown-menu
+          %li
+            %a{:href => "/users/show"} View Account
+          %li
+            %a{:href => "/users/edit"} Edit Account
+          %li.divider
+          %li.dropdown-header 
+          %li
+            %a{:href => "#"} Logout
+
+.container
+  .page-header
+    .row
+      - @events.each do |e|
+        .col-md-4 
+          %h1= e.description
+          %p
+          Name:
+          = e.name
+          %p
+          Date:
+          = e.datetime
+          %p
+          Location:
+          = e.location
+          %p
+          Who Else Was There?
+          = e.person
+          %p 
+          Last Updated:
+          = e.updated_at
+          %br
+          %br
+          = link_to "Show", event_path(e)
+          = " | "
+          = link_to "Edit", edit_event_path(e), method: "get"
+          = " | "
+          = link_to "Delete", event_path(e), :method => :delete, :data => { :confirm => 'Are you sure?'} 
+          %br
+          %br
+
+  = button_to 'Add Event', new_event_path, method: "get", :class => "button btn btn-lg btn-primary", :style => 'text-align: center'

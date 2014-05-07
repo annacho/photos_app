@@ -1,1 +1,79 @@
-show.html.haml
+.navbar.navbar-default
+  .navbar-header
+    %button.navbar-toggle{"data-target" => ".navbar-responsive-collapse", "data-toggle" => "collapse", :type => "button"}
+      %span.icon-bar
+      %span.icon-bar
+      %span.icon-bar
+    %a.navbar-brand{:href => "/"} Photo App
+  .navbar-collapse.collapse.navbar-responsive-collapse
+    %ul.nav.navbar-nav
+      %li
+        %a{:href => "/photos"} Photos
+      %li
+        %a{:href => "/events"} Events
+    %form.navbar-form.navbar-right
+      %input.form-control.col-lg-8{:placeholder => "Search", :type => "text"}
+    %ul.nav.navbar-nav.navbar-right
+      %li
+        %a{:href => "/comments"} Comments
+      %li
+        %a{:href => "/tags"} Tags    
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+          Me
+          %b.caret
+        %ul.dropdown-menu
+          %li
+            %a{:href => "/users/show"} View Account
+          %li
+            %a{:href => "/users/edit"} Edit Account
+          %li.divider
+          %li.dropdown-header 
+          %li
+            %a{:href => "/users/delete"} Logout
+
+.container
+  .page-header
+    .row
+      / .col-md-4 
+      = form_for @photo, url: "/photos/#{@photo.id}", method: "put" do |f|
+        .thumbnail
+          = image_tag @photo.image.url
+        = render 'form', f: f
+        %p
+        / = ff.comment.content
+        %p
+        %h2 Comments
+        .items
+          = f.nested_fields_for :comments do |ff|
+            %fieldset.item
+              = ff.text_field :content
+              %a.remove{href: "#"} Delete
+              / = ff.hidden_field :commentable_id, value: @event.commentable_id
+              = ff.hidden_field :commentable_type, value: "Photo"
+              = ff.hidden_field :_destroy
+        / %a.add{href: "/comments"} Add Comment
+        = f.submit "Add Comment", :class => "button btn btn-link"
+
+        / = f.fields_for :comments do |ff|
+        /   %p
+
+        /   %p
+        /   = ff.text_field :content
+        /   %p
+        /   = link_to "", :method => :delete
+        /   %p
+        / = f.submit "Add More Comments"
+      %p
+      = link_to "Save", photos_path, :class => "button btn btn-lg btn-primary"
+      / .col-md-4   
+      / - @comments.each do |c|
+      /   Content
+      /   = c.content 
+      /   = c.timestamp
+
+      / = form_for @new_comment, url: comments_path, method: :post do |f|
+      /   = f.hidden_field :commentable_id, value: @new_comment.commentable_id
+      /   = f.hidden_field :commentable_type, value: @new_comment_commentable type
+      /   = f.text_field :content
+      /   = f.submit "Add Comment"

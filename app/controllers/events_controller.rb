@@ -8,6 +8,7 @@ class EventsController < ApplicationController
   # GET /events/1
   def show
     @event = Event.find(params[:id])
+    @new_comment = @event.comments.build
   end
 
   # GET /events/new

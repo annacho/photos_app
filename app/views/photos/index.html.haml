@@ -1,1 +1,67 @@
-= f.file_field :photo
+.navbar.navbar-default
+  .navbar-header
+    %button.navbar-toggle{"data-target" => ".navbar-responsive-collapse", "data-toggle" => "collapse", :type => "button"}
+      %span.icon-bar
+      %span.icon-bar
+      %span.icon-bar
+    %a.navbar-brand{:href => "/"} Photo App
+  .navbar-collapse.collapse.navbar-responsive-collapse
+    %ul.nav.navbar-nav
+      %li
+        %a{:href => "/photos"} Photos
+      %li
+        %a{:href => "/events"} Events
+    %form.navbar-form.navbar-right
+      %input.form-control.col-lg-8{:placeholder => "Search", :type => "text"}
+    %ul.nav.navbar-nav.navbar-right
+      %li
+        %a{:href => "/comments"} Comments
+      %li
+        %a{:href => "/tags"} Tags    
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+          Me
+          %b.caret
+        %ul.dropdown-menu
+          %li
+            %a{:href => "/users/show"} View Account
+          %li
+            %a{:href => "/users/edit"} Edit Account
+          %li.divider
+          %li.dropdown-header 
+          %li
+            %a{:href => "/users/delete"} Logout
+
+.container
+  .page-header
+    .row
+      - @photos.each do |p|
+        .col-md-4 
+          .thumbnail
+            %img{:src => p.image}
+            %p
+          Album Name:
+          = p.album_name
+          %p
+          Photo Name:
+          = p.name
+          %p
+          Description:
+          = p.description
+          %p
+          Date:
+          = p.datetime
+          %p
+          Who Else is in the Picture?
+          = p.person
+          %br
+          %br
+          = link_to "Show", photo_path(p)
+          = " | "
+          = link_to "Edit", edit_photo_path(p), method: "get"
+          = " | "
+          = link_to "Delete", photo_path(p), :method => :delete, :data => { :confirm => 'Are you sure?'} 
+          %br
+          %br
+
+  = button_to 'Add Photo', new_photo_path, method: "get", :class => "button btn btn-lg btn-primary", :style => 'text-align: center'

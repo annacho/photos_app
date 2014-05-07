@@ -8,6 +8,7 @@ class PhotosController < ApplicationController
   # GET /photos/1
   def show
     @photo = Photo.find(params[:id])
+    @new_comment = @photo.comments.build
   end
 
   # GET /photos/new
@@ -58,7 +59,7 @@ class PhotosController < ApplicationController
 
   def upload_file
     @photo = Photo.find(params[:id])
-    upload_file = @photo.photo
+    upload_file = @photo.image
     send_file upload_file.path
   end
 

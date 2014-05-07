@@ -24,7 +24,7 @@ class TagsController < ApplicationController
   def create
     @new_tag = Tag.new(tag_params)
     if @new_tag.save
-      redirect_to tags_path 
+      redirect_to tags_path # or path 
     else
       redirect_to new_tag_path
     end

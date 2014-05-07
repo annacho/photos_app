@@ -11,12 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140506005046) do
+ActiveRecord::Schema.define(version: 20140506211751) do
 
   create_table "comments", force: true do |t|
-    t.text    "content"
-    t.integer "commentable_id"
-    t.string  "commentable_type"
+    t.text     "content"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.datetime "created_at"
   end
 
   create_table "events", force: true do |t|
@@ -33,7 +34,7 @@ ActiveRecord::Schema.define(version: 20140506005046) do
     t.string   "name"
     t.string   "description"
     t.string   "person"
-    t.string   "photo"
+    t.string   "image"
     t.datetime "datetime"
     t.string   "album_name"
     t.string   "album_description"
@@ -56,12 +57,12 @@ ActiveRecord::Schema.define(version: 20140506005046) do
 
   create_table "users", force: true do |t|
     t.string   "name"
-    t.string   "type"
+    t.string   "user_type"
     t.string   "username"
     t.string   "email"
-    t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "password_digest"
   end
 
 end
