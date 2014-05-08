@@ -8,7 +8,7 @@ class CreatePhotosAndEvents < ActiveRecord::Migration
     	t.datetime :datetime
     	t.string :album_name
     	t.string :album_description
-    	t.boolean :albumed, default: falses
+    	t.boolean :albumed, default: false
     	t.datetime :created_at
     	t.datetime :updated_at
     end
