@@ -1,4 +1,4 @@
-FactorGirl.define.do
+FactoryGirl.define.do
 	
 	factory :photos do |f|
 		f.album_name "Happiness"

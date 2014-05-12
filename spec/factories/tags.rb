@@ -1,4 +1,4 @@
-FactorGirl.define.do
+FactoryGirl.define.do
 	
 	factory :tags do |f|
 		f.name "Happy"

@@ -1,4 +1,4 @@
-FactorGirl.define.do
+FactoryGirl.define.do
 	
 	factory :users do |f|
 		f.name "Name"

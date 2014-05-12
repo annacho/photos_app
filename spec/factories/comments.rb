@@ -1,4 +1,4 @@
-FactorGirl.define.do
+FactoryGirl.define.do
 	
 	factory :comments do |f|
 		f.content "Dad went wild"
